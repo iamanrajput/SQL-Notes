@@ -29,11 +29,29 @@ SQL was previously known as SEQUEL (Structured English Query Language) but then 
 
 ``` DROP DATABASE db_name``` - Syntax to delete database
 
+## Creating table 
 
+```
+USE db_name;
 
+CREATE TABLE table_name (
+    column_name1 datatype constraint,
+    column_name2 datatype constraint,
+    column_name2 datatype constraint
+);
+```
+example: 
+```
+CREATE TABLE student (
+    id INT PRIMARY KEY,
+    name VARCHAR(50),
+    age INT NOT NULL
+);
+```
 
+## SQL Datatypes
 
-
+They define the types of values that can be stored in a column
 
 | DATATYPE | DESCRIPTION | USAGE |
 |----------|-------------|-------|
@@ -51,3 +69,18 @@ SQL was previously known as SEQUEL (Structured English Query Language) but then 
 | TIME     | HH:MM:SS | `TIME` |
 | YEAR     | year in 4 digits format ranging from 1901 to 2155 | `YEAR` |
 
+### Signed and Unsigned datatype
+
+As we know tinyint stored values from -128 to -127 `TINYINT(-128 to 127)` but in some cases where we know that values can't be negative eg. age, salary there we can use `TINYINT UNSIGNED(0 TO 255)` it will increase the size to positive side.
+
+## Types of SQL Commands
+
+1. DQL (Data Query Language) : Used to retrieve data from databases. (SELECT)
+2. DDL (Data Definition Language) : Used to create, alter, and delete database objects
+like tables, indexes, etc. (CREATE, DROP, ALTER, RENAME, TRUNCATE)
+3. DML (Data Manipulation Language): Used to modify the database. (INSERT,
+UPDATE, DELETE)
+4. DCL (Data Control Language): Used to grant & revoke permissions. (GRANT,
+REVOKE)
+5. TCL (Transaction Control Language): Used to manage transactions. (COMMIT,
+ROLLBACK, START TRANSACTIONS, SAVEPOINT)
