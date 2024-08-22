@@ -162,3 +162,78 @@ SQL constraints are used to specify rules for data in a table.
   CONSTRAINT age_check CHECK (age >= 18 AND city="Delhi")
   );
   ```
+## Select in Detail
+used to select any data from the database
+
+ Basic Syntax : `SELECT col1, col2 FROM table_name;`
+ 
+ To Select All : ` SELECT * FROM table_name;`
+## Where Clause
+clause is use to define some conditions
+```
+syntax:  SELECT col1, col2 FROM table_name
+         WHERE conditions
+Exapmle : 
+        SELECT * FROM student WHERE marks > 80;
+        SELECT * FROM student WHERE city = "Delhi";
+```
+Using Operators in WHERE 
+- Arithmetic Operators: +(addition), -(subtraction), *(multiplication), /(division), % (modulus)
+- Comparison Operators: = (equal to), != (not equal to), > > <=
+- Logical Operators: AND, OR, NOT, IN, BETWEEN, ALL, LIKE, ANY
+- Bitwise Operators: & (Bitwise AND), ❘ (Bitwise OR) APNA
+
+## Operators
+- AND (to check for both conditions to be true)
+  
+  `SELECT * FROM student WHERE marks > 80 AND city = "Mumbai";`
+- OR (to check for one of the conditions to be true)
+  
+  `SELECT * FROM student WHERE marks > 90 OR city = "Mumbai";`
+- Between (selects for a given range)
+  
+  `SELECT * FROM student WHERE marks BETWEEN 80 AND 90;`
+- In (matches any value in the list)
+  
+  `SELECT * FROM student WHERE city IN ("Delhi", "Mumbai");`
+- NOT (to negate the given condition)
+  
+  `SELECT * FROM student WHERE city NOT IN ("Delhi", "Mumbai");`
+
+## Limit Clause
+Sets an upper limit on number of (tuples)rows to be returned 
+
+SELECT col1, col2 FROM table_name 
+
+LIMIT number;
+
+`SELECT * FROM student LIMIT 3;`
+
+## Aggregate Functions
+Aggregare functions perform a calculation on a set of values, and return a single value.
+-  COUNT()
+-  MAX()
+-  MIN()
+-  SUM()
+-  AVG()
+
+  ```
+  Get Maximum Marks
+  SELECT max (marks) FROM student;
+
+  Get Average marks
+  SELECT avg (marks) FROM student;
+  ```
+
+## Group by Clause
+Groups rows that have the same values into summary rows. 
+It collects data from multiple records and groups the result by one or more column. 
+
+*Generally we use group by with some aggregation function. 
+
+Count number of students in each city 
+```
+SELECT city, count(name)
+FROM student
+GROUP BY city;
+```
