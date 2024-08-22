@@ -84,3 +84,44 @@ UPDATE, DELETE)
 REVOKE)
 5. TCL (Transaction Control Language): Used to manage transactions. (COMMIT,
 ROLLBACK, START TRANSACTIONS, SAVEPOINT)
+
+## Database Related Queries
+
+```
+CREATE DATABASE db_name; 
+CREATE DATABASE IF NOT EXISTS db_name;
+CREATE DATABASE IF NOT EXISTS college; 
+
+DROP DATABASE db_name; 
+DROP DATABASE IF EXISTS db_name; 
+
+SHOW DATABASES; 
+SHOW TABLES;
+```
+In this query `CREATE DATABASE IF NOT EXISTS db_name;` , we have written If not exists which means that create a database with name `xyz` if this name doesn't exist and if exist it will give us a warning.
+
+Same with `DROP DATABASE IF EXISTS db_name;` , delete a database it exist and if not exist throw us a warning.
+
+## Table related Queries
+
+To select and view all columns : `SELECT * FROM table_name;` where `*` means all.
+
+To insert : 
+```
+INSERT INTO table_name 
+(colname1, colname2);
+VALUES
+(col1_v1, col2_v1),
+(col1_v2, col2_v2);
+```
+
+example :
+```
+INSERT INTO student
+(rollno, name)
+VALUES
+(15, "Aman"),
+(34, "Mayank");
+(43, "Devesh");
+```
+
