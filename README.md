@@ -125,3 +125,40 @@ VALUES
 (43, "Devesh");
 ```
 
+## Keys
+
+### Primary Key 
+It is a column (or set of columns) in a table that uniquely identifies each row. (a unique id) There is only 1 PK & it should be NOT null.
+
+### Foreign Key
+A foreign key is a column (or set of columns) in a table that refers to the primary key in another table. There can be multiple Foreign Keys.
+- Foreign key can have duplicate and null values.
+
+## Constraints
+
+SQL constraints are used to specify rules for data in a table. 
+- NOT NULL: columns cannot have a null value `col1 int NOT NULL`
+- UNIQUE: all values in column are different `col2 int UNIQUE`
+- PRIMARY KEY: makes a column unique & not null but used only for one `id int PRIMARY KEY`
+    ```
+    CREATE TABLE temp (
+    id int not null,
+    PRIMARY KEY (id)
+    );
+    ```
+- FOREIGN KEY: prevent actions that would destroy links between tables
+  ```
+  CREATE TABLE temp (
+  cust_id int,
+  FOREIGN KEY (cust_id) references customer(id)
+  );```
+- DEFAULT: sets the default value of a column `salary INT DEFAULT 25000`, If we create a table and provide values for each column, any columns without specified values will automatically be set to their default values.
+- CHECK: it can limit the values allowed in a column
+  ```
+  CREATE TABLE city (
+  id INT PRIMARY KEY,
+  city VARCHAR(50),
+  age INT,
+  CONSTRAINT age_check CHECK (age >= 18 AND city="Delhi")
+  );
+  ```
