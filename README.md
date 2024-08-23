@@ -350,4 +350,184 @@ CREATE TABLE student (
     ON UPDATE CASCADE
 );
 ```
+## Joins
+Join is used to combine rows from two or more tables, based on a related column between them.
+student:
 
+| student_id | name  |
+|------------|-------|
+| 101        | adam  |
+| 102        | bob   |
+| 103        | casey |
+
+course:
+
+| student_id | course            |
+|------------|-------------------|
+| 102        | english           |
+| 105        | math              |
+| 103        | science           |
+| 107        | computer science  |
+
+Result:
+| student_id | name  | course           |
+|------------|-------|------------------|
+| 102        | bob   | english          |
+| 103        | casey | science          |
+
+### Inner Join
+Returns records that have matching values in both tables
+```
+Syntax
+SELECT column(s)
+FROM tableA
+INNER JOIN tableB
+ON tableA.col_name = tableB.col_name;
+
+SELECT *
+FROM student
+INNER JOIN course
+ON student.student_id = course.student_id;
+```
+
+### Left Join
+Returns all records from the left table, and the matched records from
+the right table
+```
+Syntax
+SELECT column(s)
+FROM tableA
+LEFT JOIN tableB
+ON tableA.col_name = tableB.col_name;
+
+SELECT *
+FROM student as s
+LEFT JOIN course as c
+ON s.student_id = c.student_id;
+```
+
+as s = student, so we don't need to write student everytime.This is called alias
+
+### Right Join
+Returns all records from the right table, and the matched records
+from the left table
+```
+Syntax
+SELECT column(s)
+FROM tableA
+RIGHT JOIN tableB
+ON tableA.col_name = tableB.col_name;
+
+SELECT *
+FROM student as s
+RIGHT JOIN course as c
+ON s.student_id = c.student_id;
+```
+
+### Full Join
+Returns all records when there is a match in either left or right table
+```
+SELECT * FROM student as a
+LEFT JOIN course as b
+ON a.id b.id
+UNION
+SELECT * FROM student as a
+RIGHT JOIN course as b
+ON a.id b.id;
+```
+Full Join is not suppoted in SQL, SO we will do union of Left and Right join to get full join in SQL.
+
+### Left Exclusive Join 
+```
+SELECT *
+FROM student as a
+LEFT JOIN course as b
+ON a.id b.id
+WHERE b.id IS NULL;
+```
+
+## Self Join
+It is a regular join but the table is joined with itself.
+
+```
+Syntax
+SELECT column(s)
+FROM table as a
+JOIN table as b
+ON a.col_name = b.col_name;
+
+SELECT a.name as manager_name, b.name
+FROM employee as a
+JOIN employee as
+ON a.id b.manager_id;
+```
+## Union
+It is used to combine the result-set of two or more SELECT statements.
+
+Gives UNIQUE records.
+
+To use it :
+- every SELECT should have same no. of columns
+- columns must have similar data types
+- columns in every SELECT should be in same order
+
+```
+Syntax
+SELECT column(s) FROM tableA
+UNION
+SELECT column(s) FROM tableB
+```
+## SQL Sub Queries
+A Subquery or Inner query or a Nested query is a query within another SQL query.
+
+It involves 2 select statements.
+```
+Syntax
+SELECT column(s)
+FROM table_name
+WHERE col_name operator
+( subquery );
+```
+### Example
+Get names of all students who scored more than class average.
+- Step 1. Find the avg of class
+- Step 2. Find the names of students with marks > avg
+  
+| rollno | name    | marks |
+|--------|---------|-------|
+| 101    | anil    | 78    |
+| 102    | bhumika | 93    |
+| 103    | chetan  | 85    |
+| 104    | dhruv   | 96    |
+| 105    | emanuel | 92    |
+| 106    | farah   | 82    |
+```
+SELECT name, marks
+FROM student
+WHERE marks > (SELECT AVG(marks) FROM student);
+```
+### Example
+Find the names of all students with even roll numbers.
+- Step 1. Find the even roll numbers
+- Step 2. Find the names of students with even roll no
+```
+SELECT name, rollno
+FROM student
+WHERE rollno IN (
+    SELECT rollno
+    FROM student
+    WHERE rollno % 2 = 0);
+```
+
+## MySQL Views
+A view is a virtual table based on the result-set of an SQL statement.
+```
+CREATE VIEW view1 AS
+SELECT rollno, name FROM student;
+
+SELECT * FROM view1;
+```
+*A view always shows up-to-date data. The database engine recreates the view, every time a user queries it.
+
+
+### Happy Learning 🚀
