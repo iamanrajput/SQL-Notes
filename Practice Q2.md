@@ -1,5 +1,5 @@
 ## Practise Question
-Create this sample table 
+- sample table 
 ```
 CREATE DATABASE college;
 USE college;
@@ -11,7 +11,7 @@ CREATE TABLE student (
   city VARCHAR(20)
 );
 ```
-Insert this data:
+- data:
 ```
 INSERT INTO student
 (rollno, name, marks, grade, city)
@@ -23,3 +23,11 @@ VALUES
 (105, "shruti", 72, "C", "Delhi"),
 (106, "kunal", 32, "F", "Bihar");
 ```
+
+Write a query to find avg marks in each city in ascending order:
+
+```
+SELECT city,avg(marks)
+FROM student
+GROUP BY city
+ORDER BY avg(marks) ASC;
