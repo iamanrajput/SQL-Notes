@@ -209,6 +209,19 @@ LIMIT number;
 
 `SELECT * FROM student LIMIT 3;`
 
+## Order By Clause
+
+To sort in ascending (ASC) or descending order (DESC)
+
+SELECT col1, col2 FROM table_name 
+
+ORDER BY col_name(s) ASC;
+
+```
+SELECT * FROM student;
+ORDER BY city ASC;
+```
+
 ## Aggregate Functions
 Aggregare functions perform a calculation on a set of values, and return a single value.
 -  COUNT()
@@ -225,7 +238,7 @@ Aggregare functions perform a calculation on a set of values, and return a singl
   SELECT avg (marks) FROM student;
   ```
 
-## Group by Clause
+# Group by Clause
 Groups rows that have the same values into summary rows. 
 It collects data from multiple records and groups the result by one or more column. 
 
@@ -237,3 +250,104 @@ SELECT city, count(name)
 FROM student
 GROUP BY city;
 ```
+## Having Clause
+Similar to Where i.e. applies some condition on rows. 
+- Used when we want to apply any condition after grouping.
+  
+  ```
+  SELECT count(name),
+  city FROM student
+  GROUP BY city
+  HAVING max (marks) > 90;
+  ```
+  `WHERE` apply condition on Rows and `HAVING` apply condition on Columns/groups.
+
+  ## Table Related Queries
+
+- Update (to update existing rows)
+  
+  UPDATE table_name
+
+  SET col1 = val1, col2 = val2
+  WHERE condition;
+
+  ```
+  UPDATE student
+  SET grade = "O"
+  WHERE grade = "A";
+  ```
+- Delete (to delete existing rows)
+
+  DELETE FROM table_name
+  WHERE condition;
+
+  ```
+  DELETE FROM student
+  WHERE marks < 33;
+  ```
+- Alter (to change the schema)
+  
+  ADD Column:
+  ```
+  ALTER TABLE table_name
+  ADD COLUMN column_name datatype constraint;
+  eg:
+  ALTER TABLE student
+  ADD COLUMN age INT NOT NULL DEFAULT 19;
+  ```
+  DROP Column:
+  ```
+  ALTER TABLE table_name
+  DROP COLUMN column_name;
+  eg:
+  ALTER TABLE student
+  DROP COLUMN stu_age;
+  ```
+  RENAME Table:
+  ```
+  ALTER TABLE table_name
+  RENAME TO new_table_name;
+  eg:
+  ALTER TABLE student
+  RENAME TO stu;
+  ```
+  CHANGE Column (rename)
+  ```
+  ALTER TABLE table_name
+  CHANGE COLUMN old_name new_name new_datatype new_constraint;
+  eg:
+  ALTER TABLE student
+  CHANGE age stu_age INT;
+  ```
+  MODIFY Column (modify datatype/ constraint)
+  ```
+  ALTER TABLE table_name
+  MODIFY col_name new_datatype new_constraint;
+  eg:
+  ALTER TABLE student
+  MODIFY age VARCHAR(2);
+  ```
+- Truncate (to delete table's data)
+
+In delete, we delete the entire row but in truncate table's data got deleted but the table exist.
+
+  TRUNCATE TABLE table_name;
+  ```
+  TRUNCATE TABLE student;
+  ```
+## Cascading to Foreign Key
+### On Delete Cascade 
+When we create a foreign key using this option, it deletes the referencing rows in the child table when the referenced row is deleted in the parent table which has a primary key.
+
+### On Update Cascade 
+When we create a foreign key using UPDATE CASCADE the referencing rows are updated in the child table when the referenced row is updated in the parent table which has a primary key.
+```
+CREATE TABLE student (
+    id INT PRIMARY KEY,
+    courseID INT,
+    FOREIGN KEY (courseID) REFERENCES course(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+```
+
